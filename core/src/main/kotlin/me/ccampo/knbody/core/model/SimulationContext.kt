@@ -20,7 +20,8 @@ class SimulationContext(
         val width: Int = 100,
         val height: Int = 100,
         val nPos: Int = 0,
-        val nOld: Int = 0) {
+        val nOld: Int = 0
+) {
 
     var bodies = initBodies
         private set

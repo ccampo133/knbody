@@ -33,12 +33,13 @@ fun verlet(x: Vector, v: Vector, dt: Double, a: (Vector) -> Vector): Pair<Vector
  * @param bodies The set of bodies to used to contribute to the overall gravitational acceleration.
  */
 fun gravityAcceleration(x: Vector, bodies: Set<Body>): Vector {
+
     /*
      * Newton's Law of Gravity. Here we're only returning the acceleration vector, not the force vector, according to
      * Newton's second law (F = ma)
      *
-     * Also, a "softening length" is applied to modify gravitational interactions at small scales, avoiding a singularity
-     * and hence crazy accelerations.
+     * Also, a "softening length" is applied to modify gravitational interactions at small scales, avoiding a
+     * singularity and hence crazy accelerations.
      *
      * See: http://www.scholarpedia.org/article/N-body_simulations_(gravitational)
      */
@@ -46,5 +47,6 @@ fun gravityAcceleration(x: Vector, bodies: Set<Body>): Vector {
         val r12 = body2.x - pos
         return r12 * (body2.m * G) / (r12.len.pow(2.0) + SOFTENING_LENGTH.pow(2.0)).pow(3 / 2.0)
     }
+
     return bodies.map { body -> gravity(x, body) }.fold(Vector.zero) { a1, a2 -> a1 + a2 }
 }
